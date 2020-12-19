@@ -30,6 +30,6 @@ http://localhost::8000/logout
 Running applications.
 Make sure nodejs & yarn is installed in system.
 
-1. Run yarn install
-   yarn install
-   yarn start
+1. Run npm install
+   npm install
+   npm start
