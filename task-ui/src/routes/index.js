@@ -1,6 +1,5 @@
 import React from "react";
 import {  Switch, Route } from "react-router-dom";
-import { useCurrentUser} from "./auth/hooks";
 import Layout from "../components/layouts";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
@@ -12,7 +11,6 @@ import AllTasks from "./Admin/Alltasks";
 import AllUsers from "./Admin/Allusers";
 
 export default () => {
-	const user = useCurrentUser();
 	return (
 		<Layout>
 			<Switch>

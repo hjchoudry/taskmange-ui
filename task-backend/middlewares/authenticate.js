@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 module.exports = function authenticate( req ,res, next ) {
   const token = req?.cookies.jwt;
-  // const token = `${req?.cookies.jwt}change-password`;
   if (token) {
     jwt.verify(token, "s3cr3t", (error, decodedToken) => {
       if (error) {

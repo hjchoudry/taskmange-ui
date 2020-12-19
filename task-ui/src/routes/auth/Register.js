@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ACTIONS from "./actions/types";
 import { Form, Input, Checkbox, Button } from "antd";
 
@@ -42,7 +42,6 @@ export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [serverErrors, setServerErrors] = useState();
-  console.log(serverErrors);
   return (
     <FormStyled>
       <h3>Fill form to create new Account</h3>
@@ -136,7 +135,7 @@ export default () => {
 
         <Terms>
           <Checkbox>
-            I have read the <a href="">Terms and conditions</a>
+            I have read the <Link to="#">Terms and conditions</Link>
           </Checkbox>
         </Terms>
         <Form.Item>

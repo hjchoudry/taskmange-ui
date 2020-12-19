@@ -1,8 +1,6 @@
 module.exports = (req, res, next) => {
   res.set("Content-Type", "text/plain");
-  // courtesy of https://www.asciiart.eu/movies/star-wars
   res.status(404).send(`
-
   404 - This is not the page you are looking for
                     ____
                  _.' :  \`._

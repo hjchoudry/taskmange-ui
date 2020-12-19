@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Form, Input, Button, TimePicker,DatePicker} from "antd";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ACTIONS from "./actions/types";
-import moment from 'moment';
 
 const format = 'HH:mm';
 const FormStyled = styled.div`
@@ -80,7 +79,7 @@ export default () => {
                             }
                         ]}
                     >
-                       <TimePicker defaultValue={moment('12:08', format)} format={format} />
+                       <TimePicker  format={format} />
                     </Form.Item>
                     <Form.Item
                         label="Task Date:"

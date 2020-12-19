@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Form, Input, Button, Checkbox  } from "antd";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ACTIONS from "./actions/types";
 
 const FormStyled = styled.div`
@@ -41,7 +41,7 @@ export default () => {
     <FormStyled>
       <h3>Fill form to Login</h3>
       {serverErrors?
-      <h5>{serverErrors.loginError}</h5>
+      <h5>{serverErrors?.loginError}</h5>
       :""
      }
       <Form
@@ -96,7 +96,7 @@ export default () => {
       </Form>
       <Form.Item>
         <p>
-          Don't have account? <a href="/Register">Register here</a>
+          Don't have account? <Link to="/Register">Register here</Link>
         </p>
       </Form.Item>
     </FormStyled>

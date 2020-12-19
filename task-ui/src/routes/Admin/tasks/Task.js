@@ -1,4 +1,4 @@
-import React,{ useState }from "react";
+import React from "react";
 import styled from "styled-components";
 import { BackTop} from "antd";
 import { UpCircleTwoTone } from "@ant-design/icons";
@@ -60,21 +60,21 @@ const Task = (props) => {
         <p>Created by: {task.name}, username:{task.username}</p>
           </Todotask>
           <Edits>
-          <a onClick={()=>API.delete(`delete/${task.id}`).then((res)=> 
+          <Link onClick={()=>API.delete(`delete/${task.id}`).then((res)=> 
             notification[res.data.type]({
             top:80,
             message: res.data.message,
            }))
           }
-           >Remove</a>
-           <a onClick={()=>
+           >Remove</Link>
+           <Link onClick={()=>
             API.patch(`mark/${task.id}`).then((res)=> 
              notification[res.data.type]({
             top:80,
             message: res.data.message,
            }))
           }
-           >Mark as Done</a>
+           >Mark as Done</Link>
           </Edits>
           </TodoBox>
 

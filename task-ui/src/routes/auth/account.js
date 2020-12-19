@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ACTIONS from "./actions/types";
 import  { useCurrentUser} from "./hooks";
-import { FormOutlined,ExclamationCircleOutlined } from "@ant-design/icons";
+import { FormOutlined } from "@ant-design/icons";
 
 const Container = styled.div`
 	width: 40%;

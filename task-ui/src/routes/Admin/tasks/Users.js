@@ -1,10 +1,10 @@
-import React,{ useState }from "react";
+import React from "react";
 import styled from "styled-components";
 import { BackTop} from "antd";
 import { UpCircleTwoTone } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import API from '../../../config/apiBase';
 import { notification } from 'antd';
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -42,7 +42,6 @@ const Edits = styled.div`
 
 const AllUsers = (props) => {
   const { users } = props;
-  // console.log(props)
   if (!users || users.length === 0) return <Notasks>No user yet, </Notasks>;
   return (
     <Container>
@@ -55,13 +54,13 @@ const AllUsers = (props) => {
           <p><b>type:</b> {user.type}</p>
           </Todotask>
           <Edits>
-          <a onClick={()=>API.delete(`/admin/delete-user/${user.id}`).then((res)=> 
+          <Link onClick={()=>API.delete(`/admin/delete-user/${user.id}`).then((res)=> 
             notification[res.data.type]({
             top:80,
             message: res.data.message,
            }))
           }
-           >Remove</a>
+           >Remove</Link>
           </Edits>
           </TodoBox>
           )

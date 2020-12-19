@@ -1,4 +1,4 @@
-import React,{ useState }from "react";
+import React from "react";
 import styled from "styled-components";
 import { BackTop} from "antd";
 import { UpCircleTwoTone } from "@ant-design/icons";
@@ -53,22 +53,22 @@ const Task = (props) => {
           {new Date(task.date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
           </p>
           </Todotask>
-          {task.completed == "done"?
-          <a onClick={()=>API.delete(`delete/${task.id}`).then((res)=> 
+          {task.completed === "done"?
+          <Link onClick={()=>API.delete(`delete/${task.id}`).then((res)=> 
             notification[res.data.type]({
             top:80,
             message: res.data.message,
            }))
           }
-           >Remove</a>:
-           <a onClick={()=>
+           >Remove</Link>:
+           <Link onClick={()=>
             API.patch(`mark/${task.id}`).then((res)=> 
              notification[res.data.type]({
             top:80,
             message: res.data.message,
            }))
           }
-           >Mark as Done</a>
+           >Mark as Done</Link>
           }
           </TodoBox>
           )
