@@ -1,0 +1,7 @@
+[0430/164028.790:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0516/095553.369:ERROR:crash_report_database_win.cc(428)] unexpected header
+[0516/143734.097:ERROR:crash_report_database_win.cc(428)] unexpected header
+[0517/103055.272:ERROR:crash_report_database_win.cc(428)] unexpected header
+[1202/111322.376:ERROR:crash_report_database_win.cc(455)] unexpected header
+[1215/085214.179:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1216/143341.040:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
