@@ -12,16 +12,18 @@ const Contanier = styled.div`
 	background-color: #f2f2f2;
 `;
 const Main = styled.div`
-	width: 95%;
+	width:100%;
 	margin: auto;
-	padding-left: 180px;
-	display: flex;
+	padding-left:0px;
 	min-height: 80vh;
-	align-items: center;
 	background-color: #fff;
+	@media only screen and (min-width: 1000px) {
+     padding-left:100px;
+	 width:70%;
+	}	
 `;
 const Content = styled.div`
-	width: 95%;
+	width: 100%;
 	margin: auto;
 	display: flex;
 	min-height: 80vh;
@@ -35,10 +37,10 @@ export default ({ children }) => {
 		<Contanier>
 			<Header />
 			{authenticated ? (
-				<>
-					<SideBar />
-					<Main>{children}</Main>
-				</>
+				    <>
+			         <SideBar/>
+					 <Main>{children}</Main>
+					</>
 			) : (
 				<Content>{children}</Content>
 			)}

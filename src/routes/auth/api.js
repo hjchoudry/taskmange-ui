@@ -67,16 +67,18 @@ export const changePassword = async ({
 export const addTasks = async ({
 		title,
 		details,
-		time,
-		date
+		start_time,
+		end_time,
+		created
 	}) =>
 		await axios()({
 			url: `${baseUrl}/add-task`,
 			data: {
 				title,
 				details,
-				time,
-				date
+				start_time,
+		        end_time,
+				created
 			},
 			method: methods.POST,
 			withCredentials: true,

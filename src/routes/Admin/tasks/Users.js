@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { BackTop} from "antd";
+import { BackTop , Card, Button} from "antd";
 import { UpCircleTwoTone } from "@ant-design/icons";
 import API from '../../../config/apiBase';
 import { notification } from 'antd';
-import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
-  min-height: calc(100vh - (70px + 44px));
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
   button {
     margin: 5px;
     color: #fff;
@@ -16,30 +17,17 @@ const Container = styled.div`
     background-color: #3f51b5;
   }
 `;
-const TodoBox = styled.div`
-    border: 1px solid #000;
-    min-height: 80px;
-    padding: 10px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    margin: 10px 30px;
-    justify-content: space-between;
-    background:#f2f2f2;
-`;
-const Todotask = styled.div`
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-`;
 const Notasks = styled.p`
   text-align:center;
 `;
-const Edits = styled.div`
-  display:flex;
-  flex-direction:column;
+const Cardstyled = styled(Card)`
+ width:30%;
+ background:#f1f1f1;
+ min-width:200px;
+ .ant-card-head{
+  background: ${props => props.admin==="admin" ? "#00be0e":"#f3f10f20"};
+ }
 `;
-
 const AllUsers = (props) => {
   const { users } = props;
   if (!users || users.length === 0) return <Notasks>No user yet, </Notasks>;
@@ -47,22 +35,16 @@ const AllUsers = (props) => {
     <Container>
       {users.map((user) => {
         return (
-         <TodoBox  >
-          <Todotask>
-          <h3>Name:<span> {user.name}</span></h3> 
-          <p><b>Username:</b> {user.username}</p>
-          <p><b>type:</b> {user.type}</p>
-          </Todotask>
-          <Edits>
-          <Link onClick={()=>API.delete(`/admin/delete-user/${user.id}`).then((res)=> 
+           <Cardstyled title={user.name} admin={user.type}>
+            <p><b>Username:</b> {user.username}</p>
+            <p><b>type:</b> {user.type}</p>
+             <Button type="primary" danger onClick={()=>API.delete(`/admin/delete-user/${user.id}`).then((res)=> 
             notification[res.data.type]({
             top:80,
             message: res.data.message,
-           }))
-          }
-           >Remove</Link>
-          </Edits>
-          </TodoBox>
+           }))}
+             >Remove User</Button>
+         </Cardstyled>
           )
       })}
         <BackTop>

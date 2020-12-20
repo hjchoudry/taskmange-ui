@@ -40,8 +40,8 @@ export default () => {
          <p>{error.description}</p>
         </div>:
         <>
-        <h2>All Users</h2>
-      <ListLoading isLoading={userState.loading} users={userState.users} />
+        <h2>All Users are {userState?.users?.total}</h2>
+      <ListLoading isLoading={userState.loading} users={userState?.users?.users}  />
         </>
        }
     </Home>

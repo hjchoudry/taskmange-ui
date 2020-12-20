@@ -41,8 +41,8 @@ export default () => {
          <p>{error.description}</p>
         </div>:
         <>
-        <h2>All Tasks</h2>
-      <ListLoading isLoading={appState.loading} tasks={appState.tasks} />
+        <h2>All Tasks are {appState?.tasks?.total}</h2>
+      <ListLoading isLoading={appState.loading} tasks={appState?.tasks?.allTasks} />
         </>
        }
     </Home>

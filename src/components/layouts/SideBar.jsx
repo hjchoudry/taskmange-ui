@@ -1,5 +1,6 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 import { Link, useHistory } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { useDispatch } from "react-redux";
@@ -12,29 +13,36 @@ import {
 	SnippetsOutlined,
 	UserOutlined,
 	UploadOutlined,
-	AppstoreOutlined,
+	MenuUnfoldOutlined
 } from "@ant-design/icons";
 
-const { SubMenu } = Menu;
-
 const Sider = styled(Layout.Sider)`
-	overflow: auto;
 	height: 100vh;
-	position: fixed;
+	position:fixed;
 	top: 64px;
 	left: 0;
 	right: auto;
+
 `;
+const ButtonStyled = styled.div`
+       color:#fff;
+		display:flex;
+		justify-content:flex-end;
+`; 
 
 export default () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useCurrentUser();
-
+	const [collapsed, setCollapsed ] = useState(false)
+	const isDesktop = useMediaQuery({ minWidth: 1000 });
 	return (
-		<Layout>
-			<Sider>
-				<div className="logo" />
+		<>
+			{isDesktop?
+			<Sider trigger={null} collapsible collapsed={collapsed}>
+				<ButtonStyled>
+				<MenuUnfoldOutlined  onClick={()=>setCollapsed(!collapsed)}/>
+				</ButtonStyled>
 				<Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
 					<Menu.Item key="1">
 						<Link to="/">
@@ -60,38 +68,37 @@ export default () => {
 							<span className="nav-text">My Account</span>
 						</Link>
 					</Menu.Item>
-					{user.type=== "admin"?
-                       <SubMenu key="sub1" icon={<AppstoreOutlined />} title="Admin Account">
-					<Menu.Item key="6">
+					{user.type === "admin"?
+					<Menu.Item key="5">
 					<Link to="/all-tasks">
 					 <SnippetsOutlined />
 						 <span className="nav-text">All Tasks</span>
 						</Link>
 					</Menu.Item>
-					<Menu.Item key="7">
+					 :null 
+					 } 
+					 {user.type === "admin"?
+					 <Menu.Item key="6">
 					<Link to="/all-users">
 							<CloudOutlined />
 							<span className="nav-text">All Users</span>
 						</Link>
-					</Menu.Item>
-					 </SubMenu>
-				    :null
-					}
-					<Menu.Item key="5">
+					</Menu.Item> 
+					 :null 
+					 } 
+					<Menu.Item key="7">
 					<UserOutlined />
-						<Link
-							onClick={() =>
-								dispatch({
+					<span onClick={() =>
+				 				dispatch({
 									type: ACTIONS.REQUEST_SIGNOUT,
 									payload: { history }
 								})
 							}
-						>
-							<span className="nav-text"> Logout </span>
-						</Link>
+							 className="nav-text"> Logout </span>
 					</Menu.Item>
 				</Menu>
 			</Sider>
-		</Layout>
+			:null}
+			</>
 	);
 };

@@ -203,16 +203,16 @@ function* addTasKHandler(action) {
   const {
     title,
     details,
-    time,
-    date,
+    start_time,
+    end_time,
     history,
   } = action.payload;
   try {
     const res = yield call(addTasks, {
       title,
       details,
-      time,
-      date,
+      start_time,
+      end_time,
     });
     switch (res.status) {
       case 200:
@@ -220,7 +220,7 @@ function* addTasKHandler(action) {
           type: ACTIONS.ADDTASK_SUCCESS,
           payload: res.data
         });
-        history.push("/");
+        // history.push("/");
         notification[res.data.alert.type]({
           top:80,
           message: res.data.alert.message,

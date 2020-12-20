@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BannerImg from "../../assets/images.jpg";
 
@@ -9,7 +10,7 @@ const Home = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: url(${BannerImg});
+  background: url(${BannerImg}) no-repeat center;
   h2 {
     font-size: 1.5em;
     font-weight: bold;
@@ -37,9 +38,9 @@ export default () => {
     <Home>
       <h2>Mange Tasks</h2>
       <h3>Find new ways to write tasks to do list, just</h3>
-      <a href="/register">
+      <Link to="/register">
         <button>Sign up for free</button>
-      </a>
+      </Link>
     </Home>
   );
 };

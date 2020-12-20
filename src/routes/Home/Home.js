@@ -13,7 +13,6 @@ const Home = styled.div`
   div{
     text-align:center;
   }
-
 `;
 
 export default () => {
@@ -23,7 +22,6 @@ export default () => {
     loading: false,
     tasks: null,
   });
-
   useEffect(() => {
     setAppState({ loading: true });
     API.get(`tasks-to-do`,{

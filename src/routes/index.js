@@ -1,6 +1,7 @@
 import React from "react";
 import {  Switch, Route } from "react-router-dom";
 import Layout from "../components/layouts";
+import SingleTask from "../components/SingleTask";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./Home";
@@ -9,10 +10,13 @@ import Account from "./auth/account";
 import AddSong from "./auth/add-task";
 import AllTasks from "./Admin/Alltasks";
 import AllUsers from "./Admin/Allusers";
+import { useIsAuthenticated } from "./auth/hooks";
 
 export default () => {
+	const authenticated = useIsAuthenticated();
 	return (
 		<Layout>
+			{authenticated ?
 			<Switch>
 				<Route path="/login" component={Login} />
 				<Route path="/register" component={Register} />
@@ -21,8 +25,15 @@ export default () => {
 				<Route path="/task-completed" component={TaskCompleted} />
 			    <Route path="/all-tasks" component={AllTasks} />
 				<Route path="/all-users" component={AllUsers} />
+				<Route path="/task/:id" component={SingleTask} />
 				<Route path="/" component={Home} />
-			</Switch>
+			</Switch>:
+          	<Switch>
+			  <Route path="/login" component={Login} />
+			  <Route path="/register" component={Register} />
+			  <Route path="/" component={Home} />
+		  </Switch>
+}
 		</Layout>
 	);
 };

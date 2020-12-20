@@ -68,7 +68,7 @@ export default () => {
             }
           ]}
         >
-          <Input placeholder="Name" minlength="3" maxlength="30" />
+          <Input placeholder="Name"  />
         </Form.Item>
         <Form.Item
           name="username"
