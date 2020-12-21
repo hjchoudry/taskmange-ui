@@ -1,4 +1,7 @@
+
 # this simple tasks mange system
+  # veiw applaction working here
+  https://tasksmanger.herokuapp.com/
 
 # Applaction front build in react 
 
@@ -10,7 +13,6 @@
 # 'npm start'
 
 # it will run at localhost:3000 
-
  # Here all apis:
  use base ulr with these apis
  # post apis
