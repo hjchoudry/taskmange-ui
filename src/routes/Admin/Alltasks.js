@@ -42,7 +42,7 @@ export default () => {
         </div>:
         <>
         <h2>All Tasks are {appState?.tasks?.total}</h2>
-      <ListLoading isLoading={appState.loading} tasks={appState?.tasks?.allTasks} />
+      <ListLoading isLoading={appState.loading} tasks={appState?.tasks?.allTasks} key />
         </>
        }
     </Home>

@@ -1,28 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { Card,Button } from "antd";
+import { Card, Button } from "antd";
 import API from '../config/apiBase';
 import { notification } from 'antd';
-import { Link, useHistory , useParams  } from "react-router-dom";
-import {
-  LoadingOutlined,
-  InfoCircleOutlined 
-} from '@ant-design/icons';
+import {  useHistory , useParams  } from "react-router-dom";
+import Loading from "./Loading"
 
+
+const Container = styled.div`
+margin:50px auto;
+padding: 50px;
+@media only screen and (max-width: 600px) {
+  padding: 50px 20px;
+	}	
+`;
 const Cardstyled = styled(Card)`
- width:80%;
+ width:100%;
  min-width:200px;
  text-align:center;
-
+ background:#f3f10f32;
+ .ant-card-head{
+  background: ${props => props.done==="done" ? "#00be0e":"#f3f10f32"};
+ }
 `;
 const Edits = styled.div`
   display:flex;
-  flex-direction: column;
+  gap:10px;
+  justify-content:center;
+  @media only screen and (max-width: 500px) {
+    flex-direction: column;
+	}	
 `;
 export default () => {
-  const params = useParams();
   const history = useHistory();
+  const params  = useParams();
   const [error, setError] = useState(false);
+  const [isStatus, setstatus] = useState();
   const [appState, setAppState] = useState({
     loading: false,
     tasked: null
@@ -34,53 +47,49 @@ export default () => {
     }).then((res) => {
       const task = res.data;
       setAppState({ loading: false, tasked: task });
+      setstatus(task.status)
     }).catch(() =>{
       setError(true);
       setAppState({ loading: false });
     })
-
   }, [setAppState]);
- const tasked = appState?.tasked? appState?.tasked:{};
 
-  if (appState?.loading){ 
+ const tasked = appState?.tasked? appState?.tasked:{};
+ const start_time = new Date(tasked.start_time).toLocaleString();
+ const end_time = new Date(tasked.end_time).toLocaleString();
+ const created = new Date(tasked.created).toLocaleString();
+
+ if (appState?.loading)return <Loading/>;
   return (
-    <div style={{ textAlign: 'center', fontSize: '30px'  }}>
-       <LoadingOutlined/>
-     <p> Hold on, fetching tasks may take some time :)</p>
-    </div>
-  );
-  }
-  return (
-    <>
-    {error? 
-    <div style={{ textAlign: 'center', fontSize: '30px'  }}>
-       <InfoCircleOutlined />
-     <p>Unable to fetch task</p>
-     <p onClick={history.goBack()}>Go Back</p>
-    </div>: 
-    <Cardstyled title={tasked.title} >
+    <Container>
+    {error? history.goBack(): 
+    <Cardstyled title={tasked.title} done={isStatus} >
     <p><b>Discription:</b> {tasked.details}</p>
-    <p><b>Status:</b> {tasked.completed}</p>
-    <p><b>Time:</b> {new Date(tasked.time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
-    <p><b>Date:</b> {new Date(tasked.date).getUTCDate()}/{new Date(tasked.date).getMonth()}/{new Date(tasked.date).getFullYear()}</p>
-     <p><b>type:</b> {tasked.id}</p>
-     <p><b>Created by:</b> {tasked.user_name}</p>
-     <p><b>Created on:</b> {tasked.created}</p>
-     <Button onClick={()=>API.delete(`/delete/${tasked.id}`).then((res)=> 
+    <p><b>Status:</b> {isStatus}</p>
+    <p><b>Start Time:</b> {start_time}</p>
+    <p><b>End Time:</b> {end_time}</p>
+     <p><b>Created on:</b> {created}</p>
+     <Edits>
+     <Button type="primary" danger
+     onClick={()=>API.delete(`/delete/${tasked.id}`,{withCredentials: true}).then((res)=> 
      notification[res.data?.type]({
      top:80,
      message: res.data?.message,
-   }))}
+   }),history.goBack())}
   >Remove Task</Button>
-      <Button onClick={()=>API.patch(`/mark/${tasked.id}`).then((res)=> 
+      <Button type="primary" 
+        onClick={()=>API.patch(`/mark/${tasked.id}`,
+        {status: isStatus==="done"? "undone":"done", completed_on: new Date()},
+        {withCredentials: true}).then((res)=> 
          notification[res.data?.type]({
          top:80,
          message: res.data?.message,
-       }))}
-      >Mark as Done</Button>
-       <Button onClick={()=>history.goBack()}>View details</Button>
+       }),setstatus(isStatus==="done"? "undone":"done"))}
+        >{isStatus==="done"? "Mark as uncopmleted":"Mark as completed"}</Button>
+       <Button onClick={()=>history.goBack()}>Go Back</Button>
+       </Edits>
   </Cardstyled>
    }
-   </>
+   </Container>
   );
 };

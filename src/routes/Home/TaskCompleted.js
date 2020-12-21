@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import Task from '../../components/Task';
-import TaskLoading from '../../components/TaskLoading';
+import TaskCompleted from '../../components/TaskCompleted';
 import API from '../../config/apiBase';
 
 const Home = styled.div`
   width: 100%;
   h2{
+    font-size:30px;
     margin: 10px 30px;
     text-align: center;
   }
@@ -16,7 +16,6 @@ const Home = styled.div`
 `;
 
 export default () => {
-  const ListLoading = TaskLoading(Task);
   const [error, setError] = useState();
   const [appState, setAppState] = useState({
     loading: false,
@@ -41,8 +40,9 @@ export default () => {
          <p>{error.description}</p>
         </div>:
         <>
-        <h2>Tasks completed</h2>
-      <ListLoading isLoading={appState.loading} tasks={appState.tasks} />
+        <h2>You have completed  {appState?.tasks?.total}  Tasks!</h2>
+        <hr/>
+        <TaskCompleted isLoading={appState.loading}  tasks={appState?.tasks?.tasksCompleted} /> 
         </>
        }
     </Home>

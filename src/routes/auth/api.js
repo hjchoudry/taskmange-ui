@@ -69,7 +69,6 @@ export const addTasks = async ({
 		details,
 		start_time,
 		end_time,
-		created
 	}) =>
 		await axios()({
 			url: `${baseUrl}/add-task`,
@@ -78,7 +77,7 @@ export const addTasks = async ({
 				details,
 				start_time,
 		        end_time,
-				created
+		        created: new Date()
 			},
 			method: methods.POST,
 			withCredentials: true,

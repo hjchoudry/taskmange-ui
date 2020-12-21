@@ -41,7 +41,7 @@ export default () => {
         </div>:
         <>
         <h2>All Users are {userState?.users?.total}</h2>
-      <ListLoading isLoading={userState.loading} users={userState?.users?.users}  />
+      <ListLoading isLoading={userState.loading} users={userState?.users?.users} key />
         </>
        }
     </Home>

@@ -22,7 +22,7 @@ const Notasks = styled.p`
 `;
 const Cardstyled = styled(Card)`
  width:30%;
- background:#f1f1f1;
+ background:#f9f4f4;
  min-width:200px;
  .ant-card-head{
   background: ${props => props.admin==="admin" ? "#00be0e":"#f3f10f20"};
@@ -35,7 +35,7 @@ const AllUsers = (props) => {
     <Container>
       {users.map((user) => {
         return (
-           <Cardstyled title={user.name} admin={user.type}>
+           <Cardstyled title={user.name} admin={user.type} key={user.id}>
             <p><b>Username:</b> {user.username}</p>
             <p><b>type:</b> {user.type}</p>
              <Button type="primary" danger onClick={()=>API.delete(`/admin/delete-user/${user.id}`).then((res)=> 

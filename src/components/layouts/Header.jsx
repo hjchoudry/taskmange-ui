@@ -1,11 +1,9 @@
-import React,{useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { Layout , Menu } from "antd";
 import { useIsAuthenticated} from "../../routes/auth/hooks";
 import { Link ,useHistory} from "react-router-dom";
-// import Logo from "../../assets/logo.png";
-
 import { useDispatch } from "react-redux";
 import ACTIONS from "../../routes/auth/actions/types";
 import { useCurrentUser } from "../../routes/auth/hooks";
@@ -16,8 +14,6 @@ import {
 	SnippetsOutlined,
 	UserOutlined,
 	UploadOutlined,
-	AppstoreOutlined,
-	MenuUnfoldOutlined
 } from "@ant-design/icons";
 
 const Header = styled(Layout.Header)`
@@ -59,7 +55,6 @@ export default () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useCurrentUser();
-	const [collapsed, setCollapsed ] = useState()
 	const isDesktop = useMediaQuery({ minWidth: 500 });
 	return (
 		<Header>

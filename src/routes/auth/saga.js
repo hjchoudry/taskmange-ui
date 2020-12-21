@@ -220,7 +220,7 @@ function* addTasKHandler(action) {
           type: ACTIONS.ADDTASK_SUCCESS,
           payload: res.data
         });
-        // history.push("/");
+        history.push("/");
         notification[res.data.alert.type]({
           top:80,
           message: res.data.alert.message,
