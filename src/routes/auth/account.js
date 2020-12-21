@@ -188,7 +188,6 @@ export default () => {
 			 <Popconfirm
 				title="Are you sure to delete Account?"
 				onConfirm={confirm}
-				// onCancel={cancel}
 				okText="Yes"
 				cancelText="No"
 			>

@@ -31,10 +31,6 @@ const LinkStyled = styled.div`
 	}
 `;
 const LogoStyled = styled(Link)`
-	/* img {
-		width: 80px;
-		height: 40px;
-	} */
 	font-style: italic;
     font-family: serif;
     font-size: large;
@@ -119,7 +115,6 @@ export default () => {
 			</Sider>
 			:null}
 			<LogoStyled to="/" >
-				{/* <img alt="logo here" src={Logo} /> */}
 				TaskManger
 			</LogoStyled>
 			{authenticated ? null: (

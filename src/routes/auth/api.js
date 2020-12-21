@@ -1,7 +1,6 @@
 import axios, { methods } from "../../config/axios";
 import { baseUrl } from '../../config/apiBase';
 
-
 export const signIn = async ({ username, password }) =>
 	await axios()({
 		url: `${baseUrl}/login`,

@@ -18,7 +18,6 @@ export default ()=>{
 return (
     <Loading>
        <Spin size="large" />
-     {/* <p> Hold on, fetching tasks may take some time :)</p> */}
     </Loading>
   );
 
