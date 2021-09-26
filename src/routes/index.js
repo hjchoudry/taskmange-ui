@@ -10,15 +10,18 @@ import Account from "./auth/account";
 import AddSong from "./auth/add-task";
 import AllTasks from "./Admin/Alltasks";
 import AllUsers from "./Admin/Allusers";
+import Video from "../components/video/Video";
+
 import { useIsAuthenticated } from "./auth/hooks";
 
 export default () => {
 	const authenticated = useIsAuthenticated();
 	return (
-		<Layout>
+		<>
 			{authenticated ?
 			<Switch>
-				<Route path="/login" component={Login} />
+			    <Route path="/login" component={Login} />
+				<Route path="/video" component={Video} />
 				<Route path="/register" component={Register} />
 				<Route path="/account" component={Account} />
 				<Route path="/add-task" component={AddSong} />
@@ -34,6 +37,6 @@ export default () => {
 			  <Route path="/" component={Home} />
 		  </Switch>
 }
-		</Layout>
+		</>
 	);
 };

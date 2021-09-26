@@ -23,28 +23,28 @@ export default () => {
   });
   useEffect(() => {
     setAppState({ loading: true });
-    API.get(`tasks-completed`,{
+    API.get(`tasks-completed`, {
       withCredentials: true
     }).then((tasks) => {
       const alltasks = tasks.data;
       setAppState({ loading: false, tasks: alltasks });
     }).catch(function (error) {
       setError(error?.response?.data?.alert)
-  })
+    })
   }, [setAppState]);
 
   return (
     <Home>
-       {error? <div>
-         <h3>{error.message}</h3>
-         <p>{error.description}</p>
-        </div>:
+      {error ? <div>
+        <h3>{error.message}</h3>
+        <p>{error.description}</p>
+      </div> :
         <>
-        <h2>You have completed  {appState?.tasks?.total}  Tasks!</h2>
-        <hr/>
-        <TaskCompleted isLoading={appState.loading}  tasks={appState?.tasks?.tasksCompleted} /> 
+          <h2>You have completed  {appState?.tasks?.total}  Tasks!</h2>
+          <hr />
+          <TaskCompleted isLoading={appState.loading} tasks={appState?.tasks?.tasksCompleted} />
         </>
-       }
+      }
     </Home>
   );
 };
